@@ -44,30 +44,33 @@ function toggleFullscreen() {
     
     full?
     
-    (function() {
-        if (player.exitFullscreen) {
-        player.exitFullscreen();
-        full = false;
-        } else if (document.mozCancelFullScreen) { /* Firefox */
-        player.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-        player.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { /* IE/Edge */
-        player.msExitFullscreen();
-    }})()
-    : 
-    (function() {
-        full = true;
-        if (player.requestFullscreen) {
-        player.requestFullscreen();
-        } else if (player.mozRequestFullScreen) { // Firefox 
-        player.mozRequestFullScreen();
-        } else if (player.webkitRequestFullscreen) { // Chrome, Safari and Opera 
-        player.webkitRequestFullscreen();
-        } else if (player.msRequestFullscreen) { // IE/Edge 
-        player.msRequestFullscreen();
-    }})();
-}
+        (function() {
+            full = false;
+            if (document.exitFullscreen) {
+            document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }})()
+        
+        : 
+        
+        (function() {
+            full = true;
+            if (player.requestFullscreen) {
+            player.requestFullscreen();
+            } else if (player.mozRequestFullScreen) { // Firefox 
+            player.mozRequestFullScreen();
+            } else if (player.webkitRequestFullscreen) { // Chrome, Safari and Opera 
+            player.webkitRequestFullscreen();
+            } else if (player.msRequestFullscreen) { // IE/Edge 
+            player.msRequestFullscreen();
+        }})();
+
+    }
 
 /* Hooks up our event listeners */
 toggle.addEventListener('click', togglePlay);
