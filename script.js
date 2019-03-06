@@ -1,3 +1,5 @@
+"use strict";
+
 /* Constants that hold our elements */
 const player = document.querySelector('.player');
 const video = player.querySelector('.viewer');
@@ -28,8 +30,8 @@ function handleRangeUpdate() {
     }
 }
 
-function scrub(a) {
-    const scrubTime = (a.offsetX / progress.offsetWidth) * video.duration;
+function scrub(event) {
+    const scrubTime = (event.offsetX / progress.offsetWidth) * video.duration;
     video.currentTime = scrubTime;
 }
 
@@ -83,14 +85,14 @@ skipButtons.forEach(element => {
     element.addEventListener('click', skip);
 });
 
-ranges.forEach(a => {
-    a.addEventListener('change', handleRangeUpdate);
+ranges.forEach(element => {
+    element.addEventListener('change', handleRangeUpdate);
 })
 
 progress.addEventListener('click', scrub);
 let mousedown = false;
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
-progress.addEventListener('mousemove', (a) => mousedown && scrub(a));
+progress.addEventListener('mousemove', (event) => mousedown && scrub(event));
 
 fullscreenButton.addEventListener('click', toggleFullscreen);
